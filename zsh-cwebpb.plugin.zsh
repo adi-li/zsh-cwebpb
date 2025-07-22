@@ -3,11 +3,13 @@
 # Converts common image formats to WebP using cwebp (batch mode)
 
 cwebpb() {
-  local folder="${1:-.}"
+  local folder=""
   local cwebp_args=()
 
   # Parse arguments - everything after -- goes to cwebp
   local found_double_dash=false
+  local folder_args=()
+
   for arg in "$@"; do
     if [[ "$arg" == "--" ]]; then
       found_double_dash=true
@@ -15,8 +17,17 @@ cwebpb() {
     fi
     if [[ "$found_double_dash" == true ]]; then
       cwebp_args+=("$arg")
+    else
+      folder_args+=("$arg")
     fi
   done
+
+  # Set folder from parsed arguments or default to current directory
+  if [[ ${#folder_args[@]} -gt 0 ]]; then
+    folder="${folder_args[1]}"
+  else
+    folder="."
+  fi
 
   # Default quality if no cwebp args provided
   if [[ ${#cwebp_args[@]} -eq 0 ]]; then
