@@ -1,5 +1,5 @@
-# webp-converter.plugin.zsh
-# WebP Converter Plugin for Oh-My-Zsh
+# zsh-cwebpb.plugin.zsh
+# Bulk WebP Converter Plugin for Oh-My-Zsh
 # Converts common image formats to WebP using cwebp (batch mode)
 
 cwebpb() {
